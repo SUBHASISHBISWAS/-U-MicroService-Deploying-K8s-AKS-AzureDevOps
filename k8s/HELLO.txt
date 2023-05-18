@@ -1,0 +1,67 @@
+Name:             mongo-deployment-6ddfc97dd8-csflh
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Wed, 17 May 2023 23:24:19 +0530
+Labels:           app=mongodb
+                  pod-template-hash=6ddfc97dd8
+Annotations:      <none>
+Status:           Running
+IP:               172.17.0.4
+IPs:
+  IP:           172.17.0.4
+Controlled By:  ReplicaSet/mongo-deployment-6ddfc97dd8
+Containers:
+  mongodb:
+    Container ID:   docker://31facd076a050cdd9eec911369fe44a3bdfa3210fc774522a23ac99b83bd1f79
+    Image:          mongo
+    Image ID:       docker-pullable://mongo@sha256:928347070dc089a596f869a22a4204c0feace3eb03470a6a2de6814f11fb7309
+    Port:           27017/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 17 May 2023 23:25:26 +0530
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    137
+      Started:      Wed, 17 May 2023 23:25:06 +0530
+      Finished:     Wed, 17 May 2023 23:25:23 +0530
+    Ready:          True
+    Restart Count:  1
+    Limits:
+      cpu:     500m
+      memory:  128Mi
+    Requests:
+      cpu:     250m
+      memory:  64Mi
+    Environment:
+      MONGO_INITDB_ROOT_USERNAME:  <set to the key 'mongo-root-username' in secret 'mongo-secret'>  Optional: false
+      MONGO_INITDB_ROOT_PASSWORD:  <set to the key 'mongo-root-password' in secret 'mongo-secret'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qt8hx (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-qt8hx:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age                   From               Message
+  ----    ------     ----                  ----               -------
+  Normal  Scheduled  10m                   default-scheduler  Successfully assigned default/mongo-deployment-6ddfc97dd8-csflh to minikube
+  Normal  Pulled     9m28s                 kubelet            Successfully pulled image "mongo" in 44.119474189s
+  Normal  Pulling    9m10s (x2 over 10m)   kubelet            Pulling image "mongo"
+  Normal  Created    9m8s (x2 over 9m27s)  kubelet            Created container mongodb
+  Normal  Pulled     9m8s                  kubelet            Successfully pulled image "mongo" in 2.313911968s
+  Normal  Started    9m7s (x2 over 9m27s)  kubelet            Started container mongodb

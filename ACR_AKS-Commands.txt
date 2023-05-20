@@ -34,3 +34,35 @@ az acr repository list --name acrudemyshoppingapp --output table
 
 #See tags
 az acr repository show-tags --name acrudemyshoppingapp --repository shoppingclient --output table
+
+#Create AKS cluster with attaching ACR
+az aks create --resource-group rgUdemyShoppingApp --name aksShoppingAppCluster --node-count 1 --generate-ssh-keys --attach-acr acrudemyshoppingapp
+
+#Install the Kubernetes CLI
+az aks install-cli
+
+#Connect to cluster using kubectl
+az aks get-credentials --resource-group rgUdemyShoppingApp --name aksShoppingAppCluster
+
+#checking clusters -> this will give LOcal K8 and Azure K8 Cluster
+kubectl config get-contexts
+
+#get Current Context
+kubectl config current-context
+
+#To verify node in ask cluster
+kubectl get nodes
+kubectl get all
+
+#Create ACR SECRET FILE
+kubectl create secret docker-registry acr-secret --docker-server=acrudemyshoppingapp.azurecr.io --docker-username=acrudemyshoppingapp --docker-password=yd9DGMYoFmmG+ajxrYeT=Fy3guqCTUcj --docker-email=subhasish.biswas@alstomgroup.com
+
+#get Secret
+kubectl get secret
+
+#Delete Resource
+az group delete --name rgUdemyShoppingApp --yes --no-wait
+
+
+#To Check kubernetesVersion
+az aks show --resource-group rgUdemyShoppingApp --name aksShoppingAppCluster --query kubernetesVersion --output table

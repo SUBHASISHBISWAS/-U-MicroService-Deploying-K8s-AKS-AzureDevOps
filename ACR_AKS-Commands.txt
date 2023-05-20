@@ -1,0 +1,36 @@
+az --version
+
+az login
+
+#Create a resource group
+az group create --name rgUdemyShoppingApp --location CentralIndia
+
+#Create an Azure Container Registry
+az acr create --resource-group rgUdemyShoppingApp --name acrudemyshoppingapp --sku Basic
+
+#Enable Admin Account for ACR Pull
+az acr update -n acrudemyshoppingapp --admin-enabled true
+
+#Log in to the container registry
+az acr login --name acrudemyshoppingapp
+
+#get the login server address
+az acr list --resource-group rgUdemyShoppingApp --query "[].{acrLoginServer:loginServer}" --output table
+
+#Tag your images
+
+docker tag shoppingapi:latest acrudemyshoppingapp.azurecr.io/shoppingapi:v1
+
+docker tag shoppingclient:latest acrudemyshoppingapp.azurecr.io/shoppingclient:v1
+
+
+#Pushing the Image in ACR
+docker push acrudemyshoppingapp.azurecr.io/shoppingapi:v1
+docker push acrudemyshoppingapp.azurecr.io/shoppingclient:v1
+
+
+#List images in registry
+az acr repository list --name acrudemyshoppingapp --output table
+
+#See tags
+az acr repository show-tags --name acrudemyshoppingapp --repository shoppingclient --output table

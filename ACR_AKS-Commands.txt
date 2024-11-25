@@ -55,7 +55,6 @@ kubectl get nodes
 kubectl get all
 
 #Create ACR SECRET FILE
-kubectl create secret docker-registry acr-secret --docker-server=acrudemyshoppingapp.azurecr.io --docker-username=acrudemyshoppingapp --docker-password=yd9DGMYoFmmG+ajxrYeT=Fy3guqCTUcj --docker-email=subhasish.biswas@alstomgroup.com
 
 #get Secret
 kubectl get secret
